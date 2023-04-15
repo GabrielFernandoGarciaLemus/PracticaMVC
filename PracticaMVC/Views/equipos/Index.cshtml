@@ -1,0 +1,61 @@
+﻿@{
+    IEnumerable<string> aniosList = new List<string> { "2010", "2011", "2012", "2013", "2014" };
+
+    IEnumerable<string> tipoList = new List<string> { "Escritorio", "Laptop", "All-In-One" };
+}
+
+
+@{
+    <h1>Mantinimiento de Equipos</h1>
+
+    <div class="row">
+        <div class="form-group">
+            @Html.Label("lblNombre", "Nombre Equipo:")
+            @Html.TextBox("txtNombre", "", new { @class="form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.Label("lblDescripcion", "Descripcion:")
+            @Html.TextArea("txaDescripcion", "", new { @class="form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.Label("lblMarca", "Marca del Equipo:")
+            @Html.TextBox("txtMarca", "", new { @class="form-control"})
+        </div>
+
+         <div class="form-group">
+            @Html.Label("lblModelo", "Modelo del Equipo:")
+            @Html.TextBox("txtModelo", "", new { @class="form-control"})
+        </div>
+
+
+         <div class="form-group">
+            @Html.DropDownList("ddlAnio", new SelectList(aniosList),"Selecciona el año de compra")
+         </div>
+
+         <div class="form-group">
+            @Html.Label("lblCosto", "Costo del Equipo:")
+            @Html.TextBox("txtCosto", "", new { @class="form-control"})
+         </div>
+
+        <div class="form-group">
+            @Html.Label("lblVidaUtil", "Vida Util del Equipo:")
+            @Html.TextBox("txtVidaUtil", "", new { @class="form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.DropDownList("ddlTipo", new SelectList(tipoList),"Selecciona el tipo de Equipo")
+        </div>
+
+        <div class="form-group p-2">
+            @Html.CheckBox("estado")Inactivo
+        </div>
+
+        <div class="form-group p-2">
+            <input type="submit" class="btn btn-success" value="Guardar">
+            @Html.ActionLink("Guardar", "Guardar", "Home")
+        </div>
+
+    </div>
+}
