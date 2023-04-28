@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using mvcPractica01.Models;
 using PracticaMVC.Models;
 
 namespace PracticaMVC.Models
@@ -8,6 +9,8 @@ namespace PracticaMVC.Models
         public equiposDbContext(DbContextOptions options) : base(options) 
         { 
         }
+
+        public DbSet<equipos> equipos { get; set; }
 
         public DbSet<marcas> marcas { get; set; }  
         

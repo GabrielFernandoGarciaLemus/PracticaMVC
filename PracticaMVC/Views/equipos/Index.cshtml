@@ -1,61 +1,117 @@
 ﻿@{
-    IEnumerable<string> aniosList = new List<string> { "2010", "2011", "2012", "2013", "2014" };
 
     IEnumerable<string> tipoList = new List<string> { "Escritorio", "Laptop", "All-In-One" };
+
+    IEnumerable<string> estadoList = new List<string> { "Bueno", "Regular", "Malo"};
 }
 
 
 @{
     <h1>Mantinimiento de Equipos</h1>
-
+<form asp-action="CrearEquipos">
     <div class="row">
-        <div class="form-group">
-            @Html.Label("lblNombre", "Nombre Equipo:")
-            @Html.TextBox("txtNombre", "", new { @class="form-control"})
+        <div class="form-group row mt-2 mb-4">
+           <div class="col-sm-2">
+                @Html.Label("lblNombre", "Nombre:")
+           </div>
+           <div class="col-sm-4">
+                @Html.TextBox("txtNombre", "", new { @class="form-control"})
+           </div>
+           <div class="col-sm-2">
+                @Html.Label("lblDescripcion", "Descripcion:")
+           </div>
+            <div class="col-sm-4">
+                @Html.TextArea("txaDescripcion", "", new { @class="form-control"})
+           </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("lblDescripcion", "Descripcion:")
-            @Html.TextArea("txaDescripcion", "", new { @class="form-control"})
+        <div class="form-group row mt-2 mb-4">
+            <div class="col-sm-2">
+                  @Html.Label("lblTipo", "Tipo de Equipo:")
+             </div>
+            <div class="col-sm-4">
+                    @Html.DropDownList("id_tipo_equipo",  ViewData["listadoDeTipos"] as SelectList,"Seleccione un Tipo", new {@class="form-control"})
+            </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("lblMarca", "Marca del Equipo:")
-            @Html.TextBox("txtMarca", "", new { @class="form-control"})
+        <div class="form-group row mt-2 mb-4">
+             <div class="col-sm-2">
+                  @Html.Label("lblMarca", "Marca:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.DropDownList("marca_id",ViewData["listadoDeMarcas"] as SelectList, "Seleccione una Marca", new {@class="form-control"})
+             </div>
+             <div class="col-sm-2">
+                  @Html.Label("lblModelo", "Modelo:")
+             </div>
+             <div class="col-sm-4">
+                  @Html.TextBox("txtModelo", "", new { @class="form-control"})
+             </div>
         </div>
 
-         <div class="form-group">
-            @Html.Label("lblModelo", "Modelo del Equipo:")
-            @Html.TextBox("txtModelo", "", new { @class="form-control"})
+        <div class="form-group row mt-2 mb-4">
+             <div class="col-sm-2">
+                    @Html.Label("lblAnio", "Año de Compra:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.TextBox("txtAnio", "", new { @class="form-control"})
+             </div>
+             <div class="col-sm-2">
+                    @Html.Label("lblCosto", "Costo del Equipo:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.TextBox("txtCosto", "", new { @class="form-control"})
+             </div>
         </div>
 
 
-         <div class="form-group">
-            @Html.DropDownList("ddlAnio", new SelectList(aniosList),"Selecciona el año de compra")
-         </div>
-
-         <div class="form-group">
-            @Html.Label("lblCosto", "Costo del Equipo:")
-            @Html.TextBox("txtCosto", "", new { @class="form-control"})
-         </div>
-
-        <div class="form-group">
-            @Html.Label("lblVidaUtil", "Vida Util del Equipo:")
-            @Html.TextBox("txtVidaUtil", "", new { @class="form-control"})
+        <div class="form-group row mt-2 mb-4">
+             <div class="col-sm-2">
+                    @Html.Label("lblVidaUtil", "Vida Util:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.TextBox("txtVidaUtil", "", new { @class="form-control"})
+             </div>
+             <div class="col-sm-2">
+                    @Html.Label("lblEstado", "Estado del Equipo:")
+             </div>
+             <div class="col-sm-4">
+                    @Html.DropDownList("id_estados_equipo", ViewData["listadoDeEstados"] as SelectList, "Seleccione un Estado", new {@class="form-control"})
+             </div>
         </div>
-
-        <div class="form-group">
-            @Html.DropDownList("ddlTipo", new SelectList(tipoList),"Selecciona el tipo de Equipo")
-        </div>
-
         <div class="form-group p-2">
             @Html.CheckBox("estado")Inactivo
         </div>
 
-        <div class="form-group p-2">
-            <input type="submit" class="btn btn-success" value="Guardar">
-            @Html.ActionLink("Guardar", "Guardar", "Home")
+        <div class="form-group row mb-4">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+               <input type="submit" class="btn btn-primary" value="Guardar">
+            </div>
         </div>
 
+        <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Equipo</th>
+                <th>Descripcion</th>
+                <th>Marca</th>  
+            </tr>
+        </thead>
+        <tbody>
+             @foreach (var equipo in (IEnumerable<dynamic>)ViewData["listadoEquipos"])
+             {
+             <tr>
+                <td>@equipo.nombre</td>
+                <td>@equipo.descripcion</td>
+                <td>@equipo.marca_nombre</td>
+             </tr>
+             }
+        </tbody>
+        </table>
+
     </div>
+
+</form>
 }
